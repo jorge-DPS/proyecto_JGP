@@ -1,0 +1,150 @@
+{% load static i18n %}
+<div class="post d-flex flex-column-fluid" id="kt_personas">
+  <!--begin::Container--> 
+  <div id="kt_content_container" class="container-xxl">
+    
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+      <!--begin::Container-->
+      <div class="container p-1">
+          <div class="card card-flush">
+            <!--begin::Card body-->
+            <div class="card-body pt-0">
+              <!--begin::Table container-->
+              <!--begin::Table-->
+              <div class="dataTables_wrapper dt-bootstrap4 no-footer">
+                <div class="table-responsive" id="wrapper">
+                  <!-- <input type="text" name="daterange" value=""  id="fecha_deposito"/> -->
+                  <table
+                    class="table table-striped table-row-bordered gy-5 gs-3 align-middle align-center display responsive nowrap table-sm"
+                  >
+                    <!--begin::Head-->
+                    <thead>
+                      <tr class="fw-bold fs-6 text-gray-400 text-uppercase">
+                        <th class="min-w-40px align-middle" style="width: 5%">
+                          <span>{% trans 'cod'%}</span>
+                        </th>
+                        <th class="min-w-30px align-middle" style="width: 10%">
+                          <span>{% trans 'DETEALLE'%}</span>
+                        </th>
+                        <th class="min-w-30px align-middle text-center" style="width: 8%">
+                          <span>{% trans 'INGRESO'%}</span>
+                        </th>
+                        <th class="min-w-50px align-middle text-center" style="width: 8%">
+                          <span>{% trans 'SALIDA'%}</span>
+                        </th>
+                        <th class="min-w-20px align-middle text-center" style="width: 5%">
+                          <span>{% trans 'FONDO'%}</span>
+                        </th>
+                        <th class="min-w-150px align-middle align-center" style="width: 10%">
+                          <span class="d-flex justify-content-center">{% trans 'ACCIONES'%}</span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <!--end::Head-->
+                    <!--begin::Body-->
+                    <tbody>
+                      {% for item in movimientoDelDia %}
+                      <tr style="width: 15%">
+                        <td class="py-2">
+                          <span class="fw-bold fs-6 text-gray-400 text-center" style="width: 15%" style="text-transform: capitalize">
+                            {{item.id}}
+                          </span>
+                        </td>
+                        <td class="py-2">
+                          <!-- Detalle del producto-->
+                          <span class="fw-bold fs-6 text-gray-400" style="width: 15%" style="text-transform: capitalize">
+                          {{item.detalle}}
+                          </span>
+                        </td>
+                        {% if item.monto_ingreso == 0.00 %}
+                        <!-- INGRESO -->
+                        <td class="py-2 text-center">
+                          <span class="fw-bold fs-6 text-gray-400" style="width: 15%" style="text-transform: capitalize">
+                            -
+                          </span>
+                        </td>
+                        <!-- SALIDA -->
+                        <td class="py-2 text-end">
+                          <span class="text-success fs-5 fw-bold">Bs.</span>
+                          <span class="fw-bold fs-6 text-gray-400" style="width: 15%" style="text-transform: capitalize">
+                            {{item.monto_salida}}
+                          </span>
+                        </td>
+                        {% else %}
+                        <!-- INGRESO -->
+                        <td class="py-2 fs-6 fw-bold text-end">
+                          <span class="text-success ">Bs.</span>
+                          <span class="text-gray-400" style="width: 15%" style="text-transform: capitalize">
+                            {{item.monto_ingreso}}
+                          </span>
+                        </td>
+                        <!-- SALIDA -->
+                        <td class="py-2 text-center">
+                          <span class="fw-bold fs-6 text-gray-400" style="width: 15%" style="text-transform: capitalize">
+                            -
+                          </span>
+                        </td>
+                        
+                        {% endif %}
+                        <!-- FONDO -->
+                        <td class="py-2 text-center ">
+                          {% if item.fondo == 'A' %}
+                            <span class="fw-bold fs-7 badge badge-light-primary">
+                              Fondo:&nbsp;&nbsp;{{item.fondo}}
+                            </span>
+                            {% else %}
+                            <span class="fw-bold fs-7 badge badge-light-info">
+                              Fondo:&nbsp;&nbsp;{{item.fondo}}
+                            </span>
+                          {% endif %}
+                        </td>
+                        <!-- funcionalidades -->
+                        <td class="text-end py-4 align-middle text-center">
+                          <!-- detalle -->
+                          <a href="{% url 'cajas:detalle-movimiento' pk=item.id%}" class="btn btn-sm btn-light btn-active-primary btn-icon m-1" title="Detalle">
+                              <span class="svg-icon svg-icon-md">
+                                <i class="bi bi-card-checklist"></i>
+                              </span>
+                          </a>
+                          <!-- Editar -->
+                          {% if item.fecha_transaccion|date:'Y-m-d' == fechaActual|date:'Y-m-d' %}
+                          <a href="{% url 'cajas:editar-movimiento' pk=item.id%}" class="btn btn-sm btn-light btn-active-primary btn-icon m-1"
+                            title="Editar">
+                              <i class="bi bi-pencil-square"></i>
+                          </a>
+                        {% else %}
+                            <button class="btn btn-sm btn-light btn-active-primary btn-icon m-1" title="Editar" disabled>
+                              <i class="bi bi-pencil-square"></i>
+                            </button>
+                        {% endif %}
+
+                          <!-- Eliminar -->
+                          {% comment %} {% if perms.cajas.delete_transaccioninventario %} {% endcomment %}
+                          <button
+                            @click="deleteMovimiento({{item.id}})"
+                            class="btn btn-sm btn-light-danger btn-active-danger btn-icon m-1"
+                            title="Eliminar"
+                          >
+                            <span class="svg-icon svg-icon-md">
+                              <i class="la la-trash-o fs-3"></i>
+                            </span>
+                          </button>
+                          {% comment %} {% endif %} {% endcomment %}
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                    <!--end::Body-->
+                  </table>
+                </div>
+              </div>
+              <!--end::Table-->
+              <!--end::Table container-->
+            </div>
+            <!--end::Card body-->
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

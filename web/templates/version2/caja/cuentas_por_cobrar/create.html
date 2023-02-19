@@ -1,0 +1,32 @@
+{% extends 'version2/caja/cuentas_por_cobrar/cuentasPorCobrar_base.html' %}
+{% load static i18n %}
+{% load static %}
+
+{% block title_subheader %}Cuentas{% endblock %}
+{% block subtitle_subheader %}Crear{% endblock %}
+
+{% block subheader_buttons %}
+
+<a href="{% url 'cajas:lista-cuentas-cobrar' %}" 
+class="btn btn-block btn-icon-primary btn-text-primary btn-hover-scale fw-bold">
+<i class="bi bi-arrow-bar-left fs-2"></i> {% trans 'Atras'%}
+</a>
+    <div>
+        <a id="crearCuentaCobrar"
+        class="btn btn-block btn-icon-primary btn-text-primary btn-hover-scale fw-bold">
+        {% trans 'Guardar'%}
+        </a>
+    </div>
+{% endblock %}
+{% block cuentas_por_cobrar %}  
+    {% include "version2/caja/cuentas_por_cobrar/partials/createCuentas.html" %}
+{% endblock cuentas_por_cobrar%}
+
+{% block extra_js %}
+<script>
+    $("#crearCuentaCobrar").click(function(){
+        app.createCuentas();
+    })
+</script>
+
+{% endblock extra_js %}

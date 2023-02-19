@@ -1,0 +1,33 @@
+{% extends 'version2/layouts/base8.html' %} 
+{% load static %} 
+{% block title %}Movimiento{% endblock %} 
+{% block title_subheader %}Movimiento del dia{% endblock %} 
+{% block subtitle_subheader %}Lista{% endblock %} 
+
+{% block extra_css%}
+{% endblock extra_css %} 
+
+{% load static %}
+<!--begin::Post-->
+{% block content_body %}
+<div id="movimientosDia">
+  {% block movimiento_del_dia %} 
+  {% endblock movimiento_del_dia%}
+</div>
+{% endblock content_body %} 
+<!-- end::Post -->
+{% block vue_js %}
+<script>
+  var csrftoken = "{{ csrf_token }}";
+  var URL_LIST = "{% url 'cajas:lista-movimiento' %}";
+  var fechaActual= "{{ fechaActual }}";
+  console.log("fecha", fechaActual)
+  
+  {% if movimientoDelDia %}
+  let MOVIMIENTO_ID = '{{ movimientoDelDia.id }}'
+  {% endif %}
+  
+</script>
+<script src="{% static 'app/vuejs/movimientoDia.js' %}"></script>
+<script src="{% static 'app/vuejs/validations/showToastr.js' %}"></script>
+{% endblock vue_js %}

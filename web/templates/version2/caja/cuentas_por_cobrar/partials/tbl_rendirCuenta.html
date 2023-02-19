@@ -1,0 +1,124 @@
+{% load static i18n %}
+
+<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+  <!--begin::Content wrapper-->
+  <div class="d-flex flex-column flex-column-fluid">
+      <!--begin::Content-->
+      <div id="kt_app_content" class="app-content flex-column-fluid">
+          <!--begin::Content container-->
+          <div id="kt_app_content_container" class="app-container container-xxl">
+              <!--begin::Layout-->
+              <div class="row g-5">
+                <div class="col-lg-6">
+                  <div class="card card-bordered mb-5">
+                      <div class="card-header">
+                          <div class="card-title">
+                            <span class="fs-1 fw-bold">Informacion </span>
+                          </div>
+                      </div>
+                      <div class="card-body table fs-6 fw-semibold">
+                        <table class="table fs-6 fw-semibold gs-0 gy-2 gx-2">
+                          <!--begin::Row-->
+                          <tbody>
+                          <tr class="" style="height: 3rem;">
+                            <td class="text-gray-400">Fecha de entrega:</td>
+                            <td class="text-gray-800">[[date_entrega]]</td>
+                          </tr>
+                          <!--end::Row-->
+                          <!--begin::Row-->
+                          <tr class="" style="height: 3rem;">
+                            <td class="text-gray-400">Funcionario:</td>
+                            <td class="text-gray-800">[[cuentas_cobrar_get.funcionario_id.nombre_completo]]</td>
+                          </tr>
+                          <!--end::Row-->
+                          <!--begin::Row-->
+                          <tr class="">
+                            <td class="text-gray-400">Fecha ultimo pago:</td>
+                            <td>
+                              <span class="text-gray-800">[[date_ultimo_pago]]</span>
+                            </td>
+                          </tr>
+                          <!--end::Row-->
+                        </tbody></table>
+                      </div>
+                  </div>
+                  <div class="card card-bordered mb-5">
+                    <div class="card-header">
+                        <div class="card-title">
+                          <span class="fs-1 fw-bold">Monto devuelto</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="fs-5 fw-bold text-dark mb-3">
+                        <span class=""> Monto: </span>
+                      </div>
+                      <input placeholder="Ingrese un monto" v-model="rendir_cuentas_cobrar.monto_devuelto_add" onkeypress="return filterFloat(event,this);" class="form-control form-control-solid mb-6">
+                    </div>
+                  </div>
+                </div>
+                
+            
+                <div class="col-lg-6">
+                    <div class="card card-bordered mb-5">
+                        <div class="card-header">
+                          <div class="card-title">
+                            <span class="fs-1 fw-bold">Montos</span>
+                          </div>
+                          <div v-show="cuentas_cobrar_get.estado == 'C'" class="card-toolbar">
+                            <div  class="fs-6 badge badge-light-success">
+                                Cancelado
+                            </div>
+                          </div>
+                          <div v-show="cuentas_cobrar_get.estado == 'P'" class="card-toolbar">
+                            <div  class="fs-6 badge badge-light-warning">
+                                Pendiente
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card-body table fs-6 fw-semibold">
+                          <table class="table fs-6 fw-semibold">
+                            <!--begin::Row-->
+                            <tbody>
+                            <tr class="" style="height: 3rem;">
+                              <td class="text-gray-400">Monto entregado:</td>
+                              <td class="text-gray-800">
+                                <span class="fw-bolder text-success">Bs.&nbsp;</span>
+                                <span>
+                                  [[cuentas_cobrar_get.monto_entregado]]
+                                </span>
+                              </td>
+                            </tr>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <tr class="" style="height: 3rem;">
+                              <td class="text-gray-400">monto saldo:</td>
+                              <td class="text-gray-800">
+                                <span class="fw-bolder text-success">Bs.&nbsp;</span>
+                                <span>
+                                  [[cuentas_cobrar_get.monto_saldo]]
+                                </span>
+                              </td>
+                            </tr>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <tr style="height: 3rem;">
+                              <td class="text-gray-400">Ultimo monto devuelto:</td>
+                              <td>
+                                <span class="fw-bolder text-success">Bs.&nbsp;</span>
+                                <span class="text-gray-800">[[cuentas_cobrar_get.monto_devuelto]]</span>
+                              </td>
+                            </tr>
+                            <!--end::Row-->
+                          </tbody></table>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <!--end::Layout-->
+          </div>
+          <!--end::Content container-->
+      </div>
+      <!--end::Content-->
+  </div>
+  <!--end::Content wrapper-->
+</div>

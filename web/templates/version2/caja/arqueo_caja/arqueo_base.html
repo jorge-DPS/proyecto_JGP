@@ -1,0 +1,46 @@
+{% extends 'version2/layouts/base8.html' %}
+{% load static %}
+{% block title %}Arqueo{% endblock %}
+{% block title_subheader %}Arqueo{% endblock %}
+{% block subtitle_subheader %}Lista{% endblock %}
+
+{% block extra_css %}
+
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href"estilo.css" stylesheet="text/style">
+
+{% endblock extra_css %}
+
+
+{% load static %}
+
+
+<!--begin::Post-->
+{% block content_body %}
+              <!--begin: Form Depositos -->
+              <div id="arqueo">
+                {% block content_arqueo_caja %}
+                    
+                {% endblock content_arqueo_caja %}
+              </div>
+            <!--end: Form Depositos-->
+{% endblock content_body %}
+
+{% block vue_js %}
+
+<script>
+  var csrftoken = '{{ csrf_token }}';
+  var URL_LIST = "{% url 'cajas:lista-encabezado' %}";
+  {% if enacabezado_arqueo %}
+  let ENCABEZADO_ARQUEO_ID = '{{ enacabezado_arqueo.id }}'
+  console.log("=============>",ENCABEZADO_ARQUEO_ID)
+  
+  {% endif %}
+</script>
+<script src="{% static 'app/vuejs/arqueoEncabezado.js' %}"></script>
+<script src="{% static 'app/vuejs/validations/showToastr.js' %}"> 
+<script src="{% static 'metronic8/assets/plugins/global/plugins.bundle.js' %}"></script>
+<script src="{% static 'metronic8/assets/plugins/custom/datatables/datatables.bundle.js' %}"></script>
+
+{% endblock vue_js %}

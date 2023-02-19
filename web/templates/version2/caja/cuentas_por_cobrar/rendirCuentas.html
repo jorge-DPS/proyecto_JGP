@@ -1,0 +1,47 @@
+{% extends 'version2/caja/cuentas_por_cobrar/cuentasPorCobrar_base.html' %}
+{% load static i18n %}
+
+{% block title %}{% trans 'Cuenta a rendir' %}{% endblock %}
+
+{% block title_subheader %}Cuentas por cobrar{% endblock %}
+{% block subtitle_subheader %}Rendir cuenta{% endblock %}
+
+{% block subheader_buttons %}
+
+<a href="{% url 'cajas:lista-cuentas-cobrar' %}" 
+    class="btn btn-block btn-icon-primary btn-text-primary btn-hover-scale fw-bold">
+    <i class="bi bi-arrow-bar-left fs-2"></i> {% trans 'Atras'%}
+</a>
+
+<div>
+    <a id="btnRendirCuenta"
+    class="btn btn-block btn-icon-primary btn-text-primary btn-hover-scale fw-bold">
+    {% trans 'Actualizar'%}
+    </a>
+</div>
+
+{% endblock %}
+
+
+{% block cuentas_por_cobrar %}  
+    {% include "version2/caja/cuentas_por_cobrar/partials/tbl_rendirCuenta.html" %}
+{% endblock cuentas_por_cobrar %}
+
+{% block extra_js %}
+<script src="{% static 'app/vuejs/validations/valInput2Decimales.js' %}"></script>
+
+<script>
+    
+    app.getCuentasCobrar(CUENTA_COBRAR_ID)
+</script>
+<script>
+    
+    $("#btnRendirCuenta").click(function(){
+        //app.zona_edit = ZONA_ID;
+        //app.zona_edit = ZONA_ID;
+        //app.getZona(ZONA_ID);
+        app.rendirCuentas(CUENTA_COBRAR_ID);
+    })
+</script>
+{% endblock %}
+

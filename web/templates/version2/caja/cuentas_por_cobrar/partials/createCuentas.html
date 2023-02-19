@@ -1,0 +1,34 @@
+<div class="row g-5 d-flex justify-content-center">
+  <div class="col-lg-4">
+      <div class="card mb-5 card-rounded">
+          <div class="card-header">
+            <div class="card-title">
+              <h2>Funcionario</h2>
+            </div>
+          </div>
+          <div class="card-body">
+            <label class="form-label">Seleccione un funcionario:</label>
+            <select name="select2_input" class="form-select funcionario" data-placeholder="">
+              <option></option>
+            </select>
+          </div>
+      </div>
+  </div>
+
+  <div class="col-lg-4">
+      <div class="card card-bordered mb-5">
+          <div class="card-header">
+            <div class="card-title">
+              <h2>Entrega</h2>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="">
+              <label class="form-label">Monto Entregado:</label>
+              <input class="form-control"  placeholder="cantidad" v-model="cuentas_cobrar.monto_entregado" onkeypress="return filterFloat(event,this);"/>
+            </div>
+          </div>
+      </div>
+
+  </div>
+</div>

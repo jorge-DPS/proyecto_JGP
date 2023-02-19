@@ -1,0 +1,48 @@
+{% extends "version2/caja/arqueo_caja/arqueo_base.html" %}
+{% load static i18n %}
+
+{% block title %}{% trans 'Arqueo del dia' %}{% endblock %}
+{% block title_subheader %} Arqueo del dia{% endblock %}
+{% block subtitle_subheader %}Actualizar{% endblock %}
+
+
+
+{% block subheader_buttons %}
+
+<a href="{% url 'cajas:lista-encabezado' %}" 
+    class="btn btn-block btn-icon-primary btn-text-primary btn-hover-scale fw-bold">
+    <i class="bi bi-arrow-bar-left fs-2"></i> {% trans 'Atras'%}
+</a>
+
+<div>
+    <a id="btnEditarArqueo"
+    class="btn btn-block btn-icon-primary btn-text-primary btn-hover-scale fw-bold">
+    {% trans 'Actualizar'%}
+    </a>
+</div>
+
+{% endblock %}
+
+
+{% block content_arqueo_caja  %}  
+    {% include "version2/caja/arqueo_caja/partials/tbl_arqueo.html"%}
+{% endblock content_arqueo_caja %}
+
+{% block extra_js %}
+
+<script>
+    console.log("aqui el id de la tabla", ENCABEZADO_ARQUEO_ID)
+    app.getArqueo(ENCABEZADO_ARQUEO_ID)
+    app.showTotal = 1
+</script>
+
+<script>
+    $("#btnEditarArqueo").click(function(){
+        app.editarArqueo(ENCABEZADO_ARQUEO_ID);
+        
+    })
+</script>
+<script src="{% static 'app/vuejs/validations/arqueoValidaEnteros.js' %}"></script>
+
+{% endblock %}
+

@@ -1,0 +1,82 @@
+{% load static i18n %}
+<div class="row g-5 d-flex justify-content-center " >
+
+    <div class="col-lg-8">
+        <div class="card card-stretch-70 card-bordered mb-5">
+            <div class="card-body">
+                <div class="mb-10">
+                    <div class="fs-1 text-gray-400 fw-bold text-center mb-5">Movimiento del dia</div>
+                    <div class="col-4 fs-3 fw-bold text-dark mb-5">
+                        <span class="ms-2"> Producto: </span>
+                    </div>
+                    <div class="col-lg-8 fv-row" data-select2-id="select2-data-8-j79d">
+
+                        <select v-model="movimiento.detalle"
+                        class="detalle form-select form-select-solid" 
+                        data-control="select2"
+                        data-dropdown-css-class="w-200px"
+                        data-placeholder="Seleccione un producto" data-hide-search="true">
+                            <option></option>
+                            <option value="51">Electrodomesticos</option>
+                            <option value="52">Viveres</option>
+                            <option value="53">Temporada</option>
+                            <option value="54">Art. del Hogar</option>
+                            <option value="55">Otros</option>
+                                
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="d-flex justify-content-center">
+
+                    <div class="border border-primary border-dashed rounded w-250px mb-3 ps-4 me-2">
+                        <div class="col-5 fs-3 fw-bold text-dark mb-3  mt-4">Fondos</div>
+                        <div class="mb-10 d-flex">
+                            <div class="form-check form-check-custom form-check-solid me-4">
+                                <label class="form-check-label w-65px" for="a">
+                                    <span class="fs-5 fw-bold text-dark">Fondo A</span>
+                                </label>
+                                <input class="form-check-input h-30px w-30px ms-1" id="a" v-model="movimiento.fondo" type="radio" v-bind:value="'A'" name="fondos"/>
+                            </div>
+                            <div class="form-check form-check-custom form-check-solid">
+                                <label class="form-check-label w-65px" for="b">
+                                    <span class="fs-5 fw-bold text-dark">Fondo B</span>
+                                </label>
+                                <input class="form-check-input h-30px w-30px ms-1" id="b" v-model="movimiento.fondo" type="radio" v-bind:value="'B'"  name="fondos"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-primary border-dashed rounded w-250px mb-3 ps-4 ms-2">
+                        <div class="col-5 fs-3 fw-bold text-dark mb-3 mt-4 w-200px">Ingreso/Salida</div>
+                        <div class="mb-10 d-flex">
+                            <div class="form-check form-check-custom form-check-solid me-5">
+                                <label class="form-check-label w-65px" for="in">
+                                    <span class="fs-5 fw-bold text-dark">Ingreso</span>
+                                </label>
+                                <input class="form-check-input h-30px w-30px ms-3" v-model="ingreso" type="radio" id="in" v-bind:value="'ingreso'" name="ingresos"/>
+                            </div>
+                            <div class="form-check form-check-custom form-check-solid">
+                                <label class="form-check-label w-55px" for="i">
+                                    <span class="fs-5 fw-bold text-dark">Salida</span>
+                                </label>
+                                <input class="form-check-input h-30px w-30px ms-1" v-model="ingreso" type="radio" id="i" v-bind:value="'salida'" name="ingresos"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <div class="mb-10">
+                        <div class="col-4 fs-3 fw-bold text-dark mb-3">
+                            <span class="ms-2"> Monto: </span>
+                        </div>
+                        <input class="form-control form-control-solid" placeholder="Ingrese un monto" onkeypress="return filterFloat(event,this);" v-model="monto"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  
+

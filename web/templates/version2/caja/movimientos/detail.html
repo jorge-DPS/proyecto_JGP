@@ -1,0 +1,26 @@
+{% extends 'version2/caja/movimientos/base_movimientos.html' %}
+
+{% load static i18n %}
+{% load static %}
+
+{% block title_subheader %}Detalle movimiento del dia{% endblock %}
+{% block subtitle_subheader %}Detalle{% endblock %}
+
+{% block subheader_buttons %}
+
+<a href="{% url 'cajas:lista-movimiento' %}" 
+class="btn btn-block btn-icon-primary btn-text-primary btn-hover-scale fw-bold">
+<i class="bi bi-arrow-bar-left fs-2"></i> {% trans 'Atras'%}
+</a>
+{% endblock %}
+
+{% block movimiento_del_dia %}  
+    {% include "version2/caja/movimientos/partials/detail_movimiento.html" %}
+{% endblock movimiento_del_dia %}
+
+{% block extra_js %}
+<script>
+    console.log("aqui el id de la tabla", MOVIMIENTO_ID)
+    app.getMovimiento(MOVIMIENTO_ID)
+</script>
+{% endblock extra_js %}

@@ -1,0 +1,29 @@
+{% extends 'version2/caja/cuentas_por_cobrar/cuentasPorCobrar_base.html' %}
+{% load static i18n %}
+{% block title_subheader %}Cuentas por cobrar{% endblock %}
+{% block subtitle_subheader %}Detalle{% endblock %}
+
+{% block subheader_buttons %}
+<a href="{% url 'cajas:lista-cuentas-cobrar' %}" 
+    class="btn btn-block btn-icon-primary btn-text-primary btn-hover-scale fw-bold">
+    <i class="bi bi-arrow-bar-left fs-2"></i> {% trans 'Atras'%}
+</a>
+
+
+{% endblock %}
+
+
+{% block cuentas_por_cobrar  %}  
+    {% include "version2/caja/cuentas_por_cobrar/partials/infoCuentasPorCobrar.html" %}
+{% endblock cuentas_por_cobrar %}
+
+{% block extra_js %}
+
+<script>
+    //app.zona_edit = ZONA_ID;
+    //console.log('*******', ZONA_ID);
+    app.getCuentasCobrar(CUENTA_COBRAR_ID);
+    //console.log( "app.zona_edit = Zona;",app.zona_edit)
+</script>
+
+{% endblock %}

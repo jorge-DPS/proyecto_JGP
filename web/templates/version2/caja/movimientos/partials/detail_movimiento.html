@@ -1,0 +1,107 @@
+<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+    <!--begin::Content wrapper-->
+    <div class="d-flex flex-column flex-column-fluid">
+        <!--begin::Content-->
+        <div id="kt_app_content" class="app-content flex-column-fluid">
+            <!--begin::Content container-->
+            <div id="kt_app_content_container" class="app-container container-xxl">
+                <!--begin::Layout-->
+                <div class="d-flex flex-column flex-lg-row d-flex justify-content-center">
+                    <!--begin::Content-->
+                    <div class="">
+                        <!--begin::Card-->
+                        <div class="card card-stretch-50 pt-3 mb-5 mb-xl-10">
+                            <!--begin::Card header-->
+                            <div class="card-header">
+                                <!--begin::Card title-->
+                                <div class="card-title">
+                                    <h2 class="fw-bold">Detalles</h2>
+                                </div>
+                                <!--begin::Card title-->
+                                <!--begin::Card toolbar-->
+                                {% if movimientoDelDia.fecha_transaccion|date:'Y-m-d' == fechaActual|date:'Y-m-d' %}
+                                    <div class="card-toolbar">
+                                        <a href="{% url 'cajas:editar-movimiento' pk=movimientoDelDia.id %}" class="btn btn-light-primary">Actualizar movimiento</a>
+                                    </div>
+                                {% endif %}
+                                <!--end::Card toolbar-->
+                            </div>
+                            <!--end::Card header-->
+                            <!--begin::Card body-->
+                            <div class="card-body pt-3">
+                                <!--begin::Section-->
+                                <div class="mb-10">
+                                    <!--begin::Title-->
+                                    <h5 class="mb-4">Movimiento del dia:</h5>
+                                    <!--end::Title-->
+                                    <!--begin::Details-->
+                                    <div class="d-flex flex-wrap py-5">
+                                        <!--begin::Row-->
+                                        <div class="flex-equal me-5">
+                                            <!--begin::Details-->
+                                            <table class="table fs-6 fw-semibold gs-0 gy-2 gx-2 m-0">
+                                                <!--begin::Row-->
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="mt-5 my-2 fw-bold text-gray-400 fs-6 min-w-160px w-175px">Fecha:</td>
+                                                        <td class="fs-4 fw-bolder text-gray-700 min-w-200px">
+                                                            [[movimiento.fecha_transaccion]]
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="mt-5 my-2 fw-bold text-gray-400 fs-6 min-w-160px w-175px">Producto:</td>
+                                                        <td class="fs-4 fw-bolder text-gray-700 min-w-200px">
+                                                            [[movimiento.detalle]]
+                                                        </td>
+                                                    </tr>
+                                                    <!--end::Row-->
+                                                    <!--begin::Row-->
+                                                    <tr>
+                                                        <td class="mt-5 my-2 fw-bold text-gray-400 fs-6">Fondo:</td>
+                                                        <td class="fs-4 fw-bolder text-gray-700">[[movimiento.fondo]]</td>
+                                                    </tr>
+                                                    <!--end::Row-->
+                                                    <!--begin::Row-->
+                                                    <tr>
+                                                        <td class="mt-5 my-2 fw-bold text-gray-400 fs-6">Ingreso:</td>
+                                                        <td class="fs-4 fw-bolder text-gray-700">
+                                                            <span class="text-success">Bs.</span>
+                                                            [[movimiento.monto_ingreso]]
+                                                        </td>
+                                                    </tr>
+                                                    <!--end::Row-->
+                                                    <!--begin::Row-->
+                                                    <tr>
+                                                        <td class="mt-5 my-2 fw-bold text-gray-400 fs-6 ">Salida:</td>
+                                                        <td class="fs-4 fw-bolder text-gray-700">
+                                                            <span class="text-success">Bs.</span>
+                                                            [[movimiento.monto_salida]]
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                    <!--end::Row-->
+                                                </tbody>
+                                            </table>
+                                            <!--end::Details-->
+                                        </div>
+                                        <!--end::Row-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Section-->
+                            </div>
+                            <!--end::Card body-->
+                        </div>
+                        <!--end::Card-->
+                    </div>
+                    <!--end::Content-->
+                </div>
+                <!--end::Layout-->
+            </div>
+            <!--end::Content container-->
+        </div>
+        <!--end::Content-->
+    </div>
+    <!--end::Content wrapper-->
+
+</div>

@@ -1,0 +1,45 @@
+{% extends 'version2/caja/movimientos/base_movimientos.html' %}
+
+{% load static i18n %}
+
+{% block title %}{% trans 'Editar' %}{% endblock %}
+{% block title_subheader %}{% trans 'Actualizar movimiento'%}{% endblock %}
+{% block subtitle_subheader %}Actualizar{% endblock %}
+
+
+{% block subheader_buttons %}
+
+<a href="{% url 'cajas:lista-movimiento' %}" 
+    class="btn btn-block btn-icon-primary btn-text-primary btn-hover-scale fw-bold">
+    <i class="bi bi-arrow-bar-left fs-2"></i> {% trans 'Atras'%}
+</a>
+
+<div>
+    <a id="btnEditarMovimiento"
+    class="btn btn-block btn-icon-primary btn-text-primary btn-hover-scale fw-bold">
+    {% trans 'Actualizar'%}
+    </a>
+</div>
+
+{% endblock %}
+
+
+{% block movimiento_del_dia  %}  
+    {% include "version2/caja/movimientos/partials/update_movimiento.html"%}
+{% endblock movimiento_del_dia %}
+
+{% block extra_js %}
+<script src="{% static 'app/vuejs/validations/valInput2Decimales.js' %}"></script>
+<script src="{% static 'app/vuejs/utils_movimiento.js' %}"></script>
+<script>
+    console.log("aqui el id de la tabla", MOVIMIENTO_ID)
+    app.getMovimiento(MOVIMIENTO_ID)
+</script>
+<script>
+    $("#btnEditarMovimiento").click(function(){
+        app.updateMovimiento(MOVIMIENTO_ID);
+        
+    })
+</script>
+{% endblock %}
+

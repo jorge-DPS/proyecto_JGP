@@ -1,0 +1,111 @@
+{% load static i18n %}
+<div class="post d-flex flex-column-fluid" id="kt_personas">
+  <!--begin::Container--> 
+  <div id="kt_content_container" class="container-xxl">
+    
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+      <!--begin::Container-->
+      <div class="container p-0">
+          <div class="card card-flush">
+            <!--begin::Card body-->
+            <div class="card-body pt-0">
+              <!--begin::Table container-->     
+                <!--begin::Table-->
+                <div class="dataTables_wrapper dt-bootstrap4 no-footer">
+                  <div class="table-responsive" id="wrapper">
+                    <!-- <input type="text" name="daterange" value=""  id="fecha_deposito"/> -->
+                    <table ref="tablePersona" class="table table-striped table-row-bordered gy-5 gs-7 align-middle align-center display responsive nowrap table-sm">
+                      <!--begin::Head-->
+                      <thead>
+                        <tr class="fw-bold fs-6 text-gray-400 text-uppercase">
+                          <th class="min-w-50px align-middle" style="width: 10%;">
+                            <span>{% trans ' ID'%}</span>
+                          </th>
+                          <th class="min-w-40px align-middle" style="width: 10%;">
+                            <span>{% trans 'NRO CAJA'%}</span>
+                          </th>
+                          <th class="min-w-100px align-middle" style="width: 25%;">
+                              <span>{% trans 'CAJA'%}</span>
+                          </th>
+                          <th class="min-w-100px align-middle" style="width: 10%;">
+                            <span>{% trans 'USUARIO'%}</span>
+                          </th>
+                          <th class="min-w-150px align-middle" style="width: 20%;">
+                            <span>{% trans 'FECHA'%}</span>
+                          </th>
+                          <th class="min-w-150px align-middle" style="width: 15%;">
+                            <span>{% trans 'ACCIONES'%}</span>
+                          </th>
+                        </tr>
+                      </thead>
+                      <!--end::Head-->
+                      <!--begin::Body-->
+                      <tbody id="data_table">
+                        
+                      {% for item in enacabezado_arqueo2 %}
+                        <tr style="width: 15%;">
+                          <td class=" py-2 "> 
+                            <span class="fw-bold fs-6 text-gray-400" style="width: 15%;" style="text-transform: capitalize">
+                              {{item.id}}
+                            </span>
+                          </td>
+                          <td class=" py-2 "> 
+                              <!-- Descripcion Zona-->
+                              <span class="fw-bold fs-6 text-gray-400" style="width: 15%;" style="text-transform: capitalize">
+                                {{item.caja_id}}
+                              </span>
+                              
+                          </td>
+                          <!-- LOCALIDAD -->
+                          <td class=" py-2"> 
+                            <span class="fw-bold fs-6 text-gray-400" style="width: 15%;" style="text-transform: capitalize">
+                                {{item.caja_id.codigo_oficina}}
+                            </span>
+                          </td>
+                          <td class=" py-2"> 
+                            <span class="fw-bold fs-6 text-gray-400" style="width: 15%;" style="text-transform: capitalize">
+                                {{item.usuario_id.first_name}}
+                            </span>
+                          </td>
+                          <td class=" py-2"> 
+                            <span class="fw-bold fs-6 text-gray-400" style="width: 15%;" style="text-transform: capitalize">
+                                {{item.fecha_arqueo|date:"d/m/Y" }}
+                            </span>
+                          </td>
+                          <!-- funcionalidades -->
+                          <td class="text-end py-4 align-center">
+                              <a href="#" class="btn btn-sm btn-light btn-active-primary btn-icon m-0" title="Detalle">
+                                <span class="svg-icon svg-icon-md ">
+                                  <i class="la la-print"></i>
+                                </span>
+                              </a>
+                            <!-- Editar -->
+                            <a href="{% url 'cajas:editar-encabezado' pk=item.id %}" class="btn btn-sm btn-light btn-active-primary btn-icon m-0" title="Editar">
+                              <i class="bi bi-pencil-square"></i>
+                            </a>
+                            <!-- Eliminar -->
+                            <button @click="deleteArqueo({{item.id}})" class="btn btn-sm btn-light-danger btn-active-danger btn-icon m-0" title="Eliminar">
+                              <span class="svg-icon svg-icon-md">
+                                <i class="la la-trash-o fs-3"></i>
+                              </span>
+                            </button>
+                          </td>
+                        </tr>  
+                        {% comment %} {%endfor%} {% endcomment %}
+                      {% endfor %}
+                      </tbody>
+                      <!--end::Body-->
+                    </table>
+                  </div>      
+                </div>
+                <!--end::Table-->
+              <!--end::Table container-->
+            </div>
+            <!--end::Card body-->
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+

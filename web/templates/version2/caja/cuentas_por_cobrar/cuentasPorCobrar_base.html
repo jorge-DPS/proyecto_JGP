@@ -1,0 +1,46 @@
+{% extends 'version2/layouts/base8.html' %}
+{% load static %}
+{% block title %}Cajas{% endblock %}
+{% block title_subheader %}Cuentas por cobrar{% endblock %}
+{% block subtitle_subheader %}Lista{% endblock %}
+
+{% block extra_css %}
+<link href="{% static 'app/extra_css/cuentasCobrarEstilos.css' %}" rel="stylesheet" type="text/css">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock extra_css %}
+{% load static %}
+<!--begin::Post-->
+{% block content_body %}
+              <!--begin: Form Depositos -->
+              <div id="cuentasPorCobrar">
+                {% block cuentas_por_cobrar %}
+                    
+                {% endblock cuentas_por_cobrar %}
+              </div>
+            <!--end: Form Depositos-->
+{% endblock content_body %}
+
+{% block vue_js %}
+
+<script>
+  var csrftoken = '{{ csrf_token }}';
+  var URL_LIST = "{% url 'cajas:lista-cuentas-cobrar' %}";
+
+  {% if cuentasPorCobrar %}
+  let CUENTA_COBRAR_ID = '{{ cuentasPorCobrar.id }}'
+  //console.log("=============>",CUENTA_COBRAR_ID)
+  
+  {% endif %}
+
+</script>
+<script src="{% static 'app/vuejs/validations/showToastr.js' %}"> 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="{% static 'app/vuejs/cuentasPorCobrar.js' %}"></script>
+<script src="{% static 'metronic8/assets/plugins/global/plugins.bundle.js' %}"></script>
+<script src="{% static 'metronic8/assets/plugins/custom/datatables/datatables.bundle.js' %}"></script>
+
+{% endblock vue_js %}
+
+

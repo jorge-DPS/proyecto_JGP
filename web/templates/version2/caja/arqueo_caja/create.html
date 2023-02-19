@@ -1,0 +1,42 @@
+{% extends 'version2/caja/arqueo_caja/arqueo_base.html' %}
+{% load static i18n %}
+{% load static %}
+
+{% block title_subheader %}Arqueo del dia{% endblock %}
+{% block subtitle_subheader %}Crear{% endblock %}
+
+{% block subheader_buttons %}
+
+<a href="{% url 'cajas:lista-encabezado' %}" 
+class="btn btn-block btn-icon-primary btn-text-primary btn-hover-scale fw-bold">
+<i class="bi bi-arrow-bar-left fs-2"></i> {% trans 'Atras'%}
+</a>
+    <div>
+        <a id="enviarDetalle"
+        class="btn btn-block btn-icon-primary btn-text-primary btn-hover-scale fw-bold">
+        {% trans 'Guardar'%}
+        </a>
+    </div>
+
+
+{% endblock %}
+
+
+
+
+{% block content_arqueo_caja %}  
+
+    {% include "version2/caja/arqueo_caja/partials/tbl_arqueo.html" %}
+  
+{% endblock content_arqueo_caja%}
+
+{% block extra_js %}
+
+<script>
+    $("#enviarDetalle").click(function(){
+        app.createArqueo();
+    })
+</script>
+<script src="{% static 'app/vuejs/validations/arqueoValidaEnteros.js' %}"></script>
+
+{% endblock extra_js %}

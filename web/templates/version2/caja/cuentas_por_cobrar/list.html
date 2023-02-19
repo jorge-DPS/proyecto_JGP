@@ -1,0 +1,81 @@
+{% extends 'version2/caja/cuentas_por_cobrar/cuentasPorCobrar_base.html' %}
+{% load static i18n %}
+{% load static %}
+
+{% block subheader_buttons %}
+<!-- INPUT FOR SEARCH SOLICITUD-->
+    <div class="input-group input-group-sm input-group-solid text-center" style="max-width: 200px;">
+        <input type="text" id="search_persona" placeholder="Buscar . . ." class="form-control "> 
+        <div class="input-group-append">
+            <span class="input-group-text">
+                <i class="bi bi-search fs-1x "></i>
+            </span>
+        </div>
+    </div>
+    <a href="{% url 'cajas:crear-cuenta-cobrar' %}"
+  {% comment %} <a href="{% url 'administracion:nuevo-persona' %}" aqui va la url del path a donde apuntara {% endcomment %}
+        class="btn btn-block btn-icon-primary btn-text-primary btn-hover-scale fw-bold fs-base mr-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="bi bi-plus fs-2"></i> Nuevo
+    </a>
+
+
+{% endblock %}
+
+{% block cuentas_por_cobrar %}
+
+    <div> 
+        <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header text-center">
+                <h1 class="modal-title fs-5 d-flex justify-content-center" id="exampleModalLabel">Nueva cuenta por cobrar</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body ">
+                <div class="" data-select2-id="select2-data-8-j79d">
+                  <label class="form-label">Seleccione un funcionario:</label>
+                  <select name="" id="funcionarios" class="form-select form-select-solid funcionario" data-placeholder="">
+                    <option></option>
+                  </select>
+                </div>
+                <div class="mt-8">
+                  <label class="form-label">Monto Entregado:</label>
+                  <input class="form-control form-control-solid"  placeholder="cantidad" v-model="cuentas_cobrar.monto_entregado" onkeypress="return filterFloat(event,this);"/>
+                </div>
+              </div>
+              {% verbatim error_cuentas %}
+              <div class="form-text text-danger" v-if="!!errorCuentas.message">
+                <span v-if="!!errorCuentas.message" v-for="item in errorCuentas">
+                  [[item.message]]
+                </span>
+              </div>
+              {% endverbatim error_cuentas %}
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button id="crearCuentaCobrar" type="button" class="btn btn-primary">Guardar cuenta</button>
+              </div>
+            </div>
+          </div>
+      </div>
+      
+    </div>
+
+    {% include "version2/caja/cuentas_por_cobrar/partials/list_table.html" %}
+
+{% endblock cuentas_por_cobrar %}
+
+{% block extra_js %}
+
+<script>
+  $("#crearCuentaCobrar").click(function(){
+      app.createCuentas();
+  })
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/i18n/es.js"></script>
+
+<script src="{% static 'app/vuejs/validations/valInput2Decimales.js' %}"></script>
+<script src="{% static 'app/vuejs/select2_cuentasCobrar.js' %}"></script>
+
+{% endblock extra_js %}
+
